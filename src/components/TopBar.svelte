@@ -1,13 +1,8 @@
 <script>
     import TopAppBar, {Row, Section, Title, FixedAdjust, DenseFixedAdjust, ProminentFixedAdjust, ShortFixedAdjust} from '@smui/top-app-bar';
     import IconButton from '@smui/icon-button';
-/*
-    var firebase = require('firebase');
-    var firebaseui = require('firebaseui');
-    // or using ES6 imports:
-    import * as firebaseui from 'firebaseui'
-*/
-    import { auth, googleProvider } from './firebase';
+
+    import { auth, googleProvider } from '../lib/firebase';
     import { authState } from 'rxfire/auth';
 
     export let oUser;
@@ -25,7 +20,7 @@
     }
 </script>
 
-<TopAppBar dense=true variant="fixed">
+<TopAppBar dense=true variant="static" class="col-auto"> <!-- variant="fixed" -->
   <Row>
     <Section>
       <Title>appProjectManager</Title>

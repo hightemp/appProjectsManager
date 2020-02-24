@@ -1,19 +1,54 @@
 <script>
 	console.log('App.svelte');
 
-	import TopBar from './TopBar.svelte';
+	import 'normalize.css';
+	import './css/index.sass'
+
+	import TopBar from './components/TopBar.svelte';
+  import FilteredList from './components/FilteredList.svelte';
+  import TitleBlock from './components/TitleBlock.svelte';
 	import {FixedAdjust} from '@smui/top-app-bar';
 
-	let oUser = "123";
-	// let Adjust = FixedAdjust;
+	let oUser = null;
+
+	let oSelectedElement = null;
 </script>
 
 <TopBar bind:oUser={oUser}></TopBar>
 
-<div use:FixedAdjust>
-  {oUser}
+{#if oUser}
+<div class="root-block col row full-height">
+  <div class="col-4 column">
+    <TitleBlock sTitle="Projects"/>
+    <FilteredList/>
+    <TitleBlock sTitle="Tasks"/>
+    <FilteredList/>
+  </div>
+  {#if oSelectedElement}
+    <div class="col"></div>
+  {:else}
+    <div class="centered-grey-text bg-grey-5 col">
+      No selected element
+    </div>
+  {/if}
 </div>
+{:else}
+<div class="not-signed-root-block centered-grey-text col">
+  Not signed in
+</div>
+{/if}
 
-<style>
-
+<style lang="scss">
+.root-block {
+}
+.centered-grey-text {
+	display:flex; 
+	justify-content:center; 
+	align-items: center; 
+	height: 100%; 
+	color: #aaa; 
+	font-size: 30px;
+}
+.not-signed-root-block {
+}
 </style>

@@ -34,22 +34,44 @@ export default {
 		// https://github.com/rollup/plugins/tree/master/packages/commonjs
 		resolve({
 			browser: true,
-			dedupe: importee => importee === 'svelte' || importee.startsWith('svelte/')
+      dedupe: importee => importee === 'svelte' || importee.startsWith('svelte/'),
+      "@": resolve("src")
 		}),
     commonjs(),
     
     postcss({
+      extensions: ['.css', '.sass'],
       extract: true,
       minimize: true,
       use: [
-        ['sass', {
-          includePaths: [
-            './theme',
-            './node_modules'
-          ]
-        }]
+        [
+          'sass',
+          {
+            includePaths: [
+              './theme',
+              './node_modules'
+            ]
+          }
+        ]
       ]
     }),
+    /*
+    postcss({
+      extract: true,
+      minimize: true,
+      use: [
+        [
+          'sass', 
+          {
+            includePaths: [
+              './theme',
+              './node_modules'
+            ]
+          }
+        ]
+      ]
+    }),
+    */
 
 		// In dev mode, call `npm run start` once
 		// the bundle has been generated
