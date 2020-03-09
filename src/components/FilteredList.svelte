@@ -5,17 +5,19 @@
   export let sFilterString = "";
   export let bEnableFilter = false;
 
+/*
   function fnGetVariant()
   {
     return bEnableFilter ? 'unelevated' : 'outlined';
   }
+*/
 
-  let variant = fnGetVariant();
+  $: variant = bEnableFilter ? 'unelevated' : 'outlined';
 </script>
 
 <div class="col column">
   <div class="row col-auto">
-    <Textfield dense variant={fnGetVariant()} bind:value={sFilterString} label="Filter" class="col"/>
+    <Textfield dense variant="outlined" bind:value={sFilterString} label="Filter" class="col"/>
     <Button dense class="col-auto full-height" {variant} on:click={() => bEnableFilter = !bEnableFilter }><Icon class="material-icons">filter_list</Icon></Button>
   </div>
   <div class="col">
