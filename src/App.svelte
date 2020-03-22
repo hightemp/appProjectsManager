@@ -1,17 +1,33 @@
 <script>
-	console.log('App.svelte');
+import { $log as log } from './lib/utils';
 
-	import 'normalize.css';
-	import './css/index.sass'
+log('App.svelte');
 
-	import TopBar from './components/TopBar.svelte';
-  import FilteredList from './components/FilteredList.svelte';
-  import TitleBlock from './components/TitleBlock.svelte';
-	import {FixedAdjust} from '@smui/top-app-bar';
+import 'normalize.css';
+import './css/index.sass'
 
-	let oUser = null;
+import TopBar from './components/TopBar.svelte';
+import FilteredList from './components/FilteredList.svelte';
+import TitleBlock from './components/TitleBlock.svelte';
+import {FixedAdjust} from '@smui/top-app-bar';
 
-	let oSelectedElement = null;
+let oUser = null;
+
+let oSelectedElement = null;
+
+var aProjectsList = [];
+var aTodoList = [];
+
+function fnAddProject()
+{
+  log('fnAddProject');
+}
+
+function fnRemoveProject()
+{
+  log('fnRemoveProject');
+}
+
 </script>
 
 <TopBar bind:oUser={oUser}></TopBar>
@@ -20,7 +36,10 @@
 <div class="root-block col row full-height">
   <div class="col-4 column">
     <TitleBlock sTitle="Projects"/>
-    <FilteredList/>
+    <FilteredList 
+      on:add_click={fnAddProject}
+      on:remove_click={fnRemoveProject}
+    />
     <TitleBlock sTitle="Tasks"/>
     <FilteredList/>
   </div>
